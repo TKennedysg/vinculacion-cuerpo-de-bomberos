@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Comprobante extends Model
 {
@@ -46,5 +48,25 @@ class Comprobante extends Model
     public function contribuyente(): BelongsTo
     {
         return $this->belongsTo(Contribuyente::class, 'contribuyente_id');
+    }
+
+    public function liquidaciones(): HasMany
+    {
+        return $this->hasMany(LiquidacionDetalle::class, 'comprobante_id');
+    }
+
+    public function formasPago(): HasMany
+    {
+        return $this->hasMany(ComprobantePago::class, 'comprobante_id');
+    }
+
+    public function permiso(): HasOne
+    {
+        return $this->hasOne(PermisoFuncionamiento::class, 'comprobante_id');
+    }
+
+    public function certificado(): HasOne
+    {
+        return $this->hasOne(CertificadoSolvencia::class, 'comprobante_id');
     }
 }
