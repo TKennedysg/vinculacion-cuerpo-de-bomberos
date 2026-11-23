@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function contribuyente(): BelongsTo
     {
         return $this->belongsTo(Contribuyente::class, 'contribuyente_id');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->estado === 'ACTIVO';
     }
 }
