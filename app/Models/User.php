@@ -65,6 +65,22 @@ class User extends Authenticatable
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->estado === 'ACTIVO';
+        return $this->estado === 'ACTIVO'
+            && in_array($this->perfil?->nombre, ['ADMINISTRADOR', 'RECAUDADOR'], true);
+    }
+
+    public function esAdministrador(): bool
+    {
+        return $this->perfil?->nombre === 'ADMINISTRADOR';
+    }
+
+    public function esRecaudador(): bool
+    {
+        return $this->perfil?->nombre === 'RECAUDADOR';
+    }
+
+    public function esContribuyente(): bool
+    {
+        return $this->perfil?->nombre === 'CONTRIBUYENTE';
     }
 }
