@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -14,17 +12,23 @@ class UsersTable
     {
         return $table
             ->columns([
-                TextColumn::make('perfil.id')
+                TextColumn::make('perfil.nombre')
+                    ->label('Perfil')
                     ->searchable(),
                 TextColumn::make('nombres')
+                    ->label('Nombres')
                     ->searchable(),
                 TextColumn::make('correo')
+                    ->label('Correo')
                     ->searchable(),
-                TextColumn::make('contribuyente.id')
+                TextColumn::make('contribuyente.razon_social')
+                    ->label('Contribuyente')
                     ->searchable(),
-                TextColumn::make('puntoEmision.id')
+                TextColumn::make('puntoEmision.punto_codigo')
+                    ->label('Punto de emisión')
                     ->searchable(),
                 TextColumn::make('estado')
+                    ->label('Estado')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -41,10 +45,6 @@ class UsersTable
             ->recordActions([
                 EditAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->toolbarActions([]);
     }
 }
