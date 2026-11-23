@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Filament\Panel;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,12 +16,12 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['perfil_id', 'nombres', 'correo', 'password_hash', 'contribuyente_id', 'punto_emision_id', 'estado'])]
 #[Hidden(['password_hash', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPasswordContract
 {
     protected $table = 'usuario';
 
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use CanResetPassword, HasFactory, Notifiable;
 
     /**
      * Get the attributes that should be cast.
@@ -44,6 +46,11 @@ class User extends Authenticatable
     }
 
     public function getEmailForPasswordReset(): string
+    {
+        return $this->correo;
+    }
+
+    public function routeNotificationForMail(): string
     {
         return $this->correo;
     }
