@@ -18,6 +18,14 @@ class PerfilResource extends Resource
 {
     protected static ?string $model = Perfil::class;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Administración';
+
+    protected static ?string $navigationLabel = 'Perfiles';
+
+    protected static ?string $modelLabel = 'perfil';
+
+    protected static ?string $pluralModelLabel = 'perfiles';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema

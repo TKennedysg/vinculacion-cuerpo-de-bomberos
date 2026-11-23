@@ -18,6 +18,14 @@ class PuntoEmisionResource extends Resource
 {
     protected static ?string $model = PuntoEmision::class;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Administración';
+
+    protected static ?string $navigationLabel = 'Puntos de emisión';
+
+    protected static ?string $modelLabel = 'punto de emisión';
+
+    protected static ?string $pluralModelLabel = 'puntos de emisión';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
