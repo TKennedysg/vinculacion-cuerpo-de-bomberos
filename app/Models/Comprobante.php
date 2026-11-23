@@ -42,4 +42,9 @@ class Comprobante extends Model
     {
         return $this->belongsTo(User::class, 'usuario_id');
     }
+
+    public function contribuyente(): BelongsTo
+    {
+        return $this->belongsTo(Contribuyente::class, 'contribuyente_id');
+    }
 }

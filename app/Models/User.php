@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(PuntoEmision::class, 'punto_emision_id');
     }
+
+    public function contribuyente(): BelongsTo
+    {
+        return $this->belongsTo(Contribuyente::class, 'contribuyente_id');
+    }
 }
