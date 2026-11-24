@@ -31,6 +31,10 @@ erDiagram
 ### Seguridad (Módulo 1 · Emilio)
 **perfil**: `id`, `nombre` (ADMINISTRADOR / RECAUDADOR / CONTRIBUYENTE), `descripcion`
 
+> Los roles se gestionan con esta tabla y los métodos `esAdministrador()`, `esRecaudador()` y
+> `esContribuyente()` del modelo `User`, con Policies en el backend. El paquete
+> `spatie/laravel-permission` permanece instalado hasta que el equipo autorice su retiro.
+
 **usuario**: `id`, `perfil_id`, `nombres`, `correo` (único), `password_hash`, `contribuyente_id` (nullable, solo para el perfil contribuyente), `punto_emision_id`, `estado`
 
 **punto_emision**: `id`, `establecimiento_codigo` (ej. 001), `punto_codigo` (ej. 007), `secuencia_actual`, `descripcion`

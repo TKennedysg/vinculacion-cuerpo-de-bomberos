@@ -43,8 +43,10 @@ Componentes compartidos (respetar su interfaz; los cambios los hace su dueño):
   y Tailwind CSS para el diseño. Las vistas se hacen con Blade.
 - **Base de datos:** MySQL 8 (o MariaDB). Se accede solo con Eloquent o el Query Builder, nunca
   concatenando SQL. Todo cambio de tablas se hace con migraciones de Laravel.
-- **Autenticación y roles:** el login de Filament con recuperación de contraseña, y `spatie/laravel-permission`
-  para los perfiles ADMINISTRADOR, RECAUDADOR y CONTRIBUYENTE.
+- **Autenticación y roles:** el login de Filament con recuperación de contraseña. Los perfiles
+  ADMINISTRADOR, RECAUDADOR y CONTRIBUYENTE se manejan con la tabla `perfil` y los métodos del
+  modelo `User` (`esAdministrador()`, `esRecaudador()` y `esContribuyente()`), con Policies en el
+  backend. `spatie/laravel-permission` permanece instalado hasta que el equipo autorice su retiro.
 - **Reportes/PDF:** `barryvdh/laravel-dompdf` para comprobantes, certificados y cortes de caja.
 - **Pruebas:** PHPUnit o Pest, sobre todo para los cálculos de `docs/reglas-de-negocio.md`.
 - **Entorno local recomendado (Windows):** Laragon (PHP + MySQL + Composer) y Node.js.
