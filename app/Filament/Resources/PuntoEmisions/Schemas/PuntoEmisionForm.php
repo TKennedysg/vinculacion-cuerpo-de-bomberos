@@ -24,6 +24,8 @@ class PuntoEmisionForm
                     ->regex('/^\d{3}$/')
                     ->required(),
                 TextInput::make('secuencia_actual')
+                    ->label('Secuencia actual')
+                    ->disabledOn('edit')
                     ->required()
                     ->integer()
                     ->minValue(0)
