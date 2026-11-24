@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use App\Models\PuntoEmision;
+use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Get;
@@ -20,6 +21,7 @@ class UserForm
                     ->relationship('perfil', 'nombre')
                     ->searchable()
                     ->preload()
+                    ->disabled(fn (string $operation, ?User $record): bool => self::shouldDisableSelfManagedFields($operation, $record))
                     ->required(),
                 TextInput::make('nombres')
                     ->label('Nombres completos')
@@ -62,8 +64,14 @@ class UserForm
                         'INACTIVO' => 'INACTIVO',
                     ])
                     ->native(false)
+                    ->disabled(fn (string $operation, ?User $record): bool => self::shouldDisableSelfManagedFields($operation, $record))
                     ->required()
                     ->default('ACTIVO'),
             ]);
+    }
+
+    public static function shouldDisableSelfManagedFields(string $operation, ?User $record): bool
+    {
+        return $operation === 'edit' && auth()->id() === $record?->id;
     }
 }
