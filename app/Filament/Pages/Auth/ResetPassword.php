@@ -16,7 +16,6 @@ class ResetPassword extends BaseResetPassword
         return [
             'correo' => $data['email'],
             'password' => $data['password'],
-            'password_confirmation' => $data['passwordConfirmation'],
             'token' => $data['token'],
         ];
     }
