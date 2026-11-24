@@ -32,6 +32,7 @@ Todos los cobros ──► Santiago (cortes de caja RF-40 y 41)
 | Componente | Dueño | Lo usan | Interfaz acordada |
 |---|---|---|---|
 | `SecuenciaTesoreriaService::siguiente($puntoEmision)` | Emilio | Adrian, Santiago, Erick | Devuelve `EEE-PPP-SSSSSSSSS` |
+| `SecuenciaTesoreriaService::siguienteParaComprobante($puntoEmision)` | Emilio | Leo, Adrian, Santiago, Erick | Devuelve `punto_emision_id`, `secuencial` de 9 dígitos y `numero` completo |
 | `AnulacionService::anular($comprobante, $motivo)` | Emilio | Leo, Santiago, Erick | Estado X + auditoría |
 | `LiquidacionPredialService::calcular($predio, $anios)` | Adrian | Leo | Filas por año + total |
 | `EstadoCuentaPredialService::adeuda($contribuyente)` | Adrian | Erick | `bool` + años adeudados |

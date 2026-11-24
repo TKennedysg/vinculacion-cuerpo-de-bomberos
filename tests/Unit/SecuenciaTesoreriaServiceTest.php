@@ -41,4 +41,21 @@ class SecuenciaTesoreriaServiceTest extends TestCase
         $this->assertSame('001-007-000000042', $servicio->siguiente($puntoEmision));
         $this->assertSame('001-007-000000043', $servicio->siguiente($puntoEmision));
     }
+
+    public function test_returns_separated_values_for_a_comprobante(): void
+    {
+        $puntoEmision = PuntoEmision::query()->create([
+            'establecimiento_codigo' => '001',
+            'punto_codigo' => '007',
+            'secuencia_actual' => 8,
+        ]);
+
+        $resultado = app(SecuenciaTesoreriaService::class)->siguienteParaComprobante($puntoEmision);
+
+        $this->assertSame([
+            'punto_emision_id' => $puntoEmision->id,
+            'secuencial' => '000000009',
+            'numero' => '001-007-000000009',
+        ], $resultado);
+    }
 }
