@@ -55,9 +55,13 @@ class UserForm
                     ->getOptionLabelFromRecordUsing(fn (PuntoEmision $record): string => "{$record->establecimiento_codigo}-{$record->punto_codigo}")
                     ->searchable()
                     ->preload(),
-                TextInput::make('estado')
+                Select::make('estado')
                     ->label('Estado')
-                    ->datalist(['ACTIVO', 'INACTIVO'])
+                    ->options([
+                        'ACTIVO' => 'ACTIVO',
+                        'INACTIVO' => 'INACTIVO',
+                    ])
+                    ->native(false)
                     ->required()
                     ->default('ACTIVO'),
             ]);
