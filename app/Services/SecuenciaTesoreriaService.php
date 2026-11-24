@@ -10,7 +10,23 @@ class SecuenciaTesoreriaService
 {
     public function siguiente(PuntoEmision $puntoEmision): string
     {
-        return DB::transaction(function () use ($puntoEmision): string {
+        return $this->siguienteDatos($puntoEmision)['numero'];
+    }
+
+    /**
+     * @return array{punto_emision_id: int, secuencial: string, numero: string}
+     */
+    public function siguienteParaComprobante(PuntoEmision $puntoEmision): array
+    {
+        return $this->siguienteDatos($puntoEmision);
+    }
+
+    /**
+     * @return array{punto_emision_id: int, secuencial: string, numero: string}
+     */
+    private function siguienteDatos(PuntoEmision $puntoEmision): array
+    {
+        return DB::transaction(function () use ($puntoEmision): array {
             /** @var PuntoEmision $puntoBloqueado */
             $puntoBloqueado = PuntoEmision::query()
                 ->lockForUpdate()
@@ -26,12 +42,19 @@ class SecuenciaTesoreriaService
                 'secuencia_actual' => $siguiente,
             ]);
 
-            return sprintf(
+            $secuencial = str_pad((string) $siguiente, 9, '0', STR_PAD_LEFT);
+            $numero = sprintf(
                 '%s-%s-%s',
                 $this->codigo($puntoBloqueado->establecimiento_codigo),
                 $this->codigo($puntoBloqueado->punto_codigo),
-                str_pad((string) $siguiente, 9, '0', STR_PAD_LEFT),
+                $secuencial,
             );
+
+            return [
+                'punto_emision_id' => (int) $puntoBloqueado->getKey(),
+                'secuencial' => $secuencial,
+                'numero' => $numero,
+            ];
         });
     }
 
