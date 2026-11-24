@@ -12,14 +12,25 @@ class PuntoEmisionForm
         return $schema
             ->components([
                 TextInput::make('establecimiento_codigo')
+                    ->label('Código de establecimiento')
+                    ->minLength(3)
+                    ->maxLength(3)
+                    ->regex('/^\d{3}$/')
                     ->required(),
                 TextInput::make('punto_codigo')
+                    ->label('Código de punto')
+                    ->minLength(3)
+                    ->maxLength(3)
+                    ->regex('/^\d{3}$/')
                     ->required(),
                 TextInput::make('secuencia_actual')
                     ->required()
-                    ->numeric()
+                    ->integer()
+                    ->minValue(0)
+                    ->maxValue(999999999)
                     ->default(0),
-                TextInput::make('descripcion'),
+                TextInput::make('descripcion')
+                    ->maxLength(255),
             ]);
     }
 }

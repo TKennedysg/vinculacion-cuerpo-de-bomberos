@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Perfils\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class PerfilForm
@@ -12,9 +12,16 @@ class PerfilForm
     {
         return $schema
             ->components([
-                TextInput::make('nombre')
+                Select::make('nombre')
+                    ->options([
+                        'ADMINISTRADOR' => 'ADMINISTRADOR',
+                        'RECAUDADOR' => 'RECAUDADOR',
+                        'CONTRIBUYENTE' => 'CONTRIBUYENTE',
+                    ])
+                    ->native(false)
                     ->required(),
                 Textarea::make('descripcion')
+                    ->maxLength(500)
                     ->columnSpanFull(),
             ]);
     }
