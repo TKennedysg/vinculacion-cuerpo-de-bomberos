@@ -9,7 +9,7 @@ class PuntoEmisionSeeder extends Seeder
 {
     public function run(): void
     {
-        PuntoEmision::query()->updateOrCreate(
+        PuntoEmision::query()->firstOrCreate(
             [
                 'establecimiento_codigo' => '001',
                 'punto_codigo' => '001',
