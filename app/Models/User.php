@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -16,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['perfil_id', 'nombres', 'correo', 'password_hash', 'contribuyente_id', 'punto_emision_id', 'estado'])]
 #[Hidden(['password_hash', 'remember_token'])]
-class User extends Authenticatable implements CanResetPasswordContract
+class User extends Authenticatable implements CanResetPasswordContract, HasName
 {
     protected $table = 'usuario';
 
@@ -68,6 +69,11 @@ class User extends Authenticatable implements CanResetPasswordContract
     public function contribuyente(): BelongsTo
     {
         return $this->belongsTo(Contribuyente::class, 'contribuyente_id');
+    }
+
+    public function getFilamentName(): string
+    {
+        return $this->nombres;
     }
 
     public function canAccessPanel(Panel $panel): bool
