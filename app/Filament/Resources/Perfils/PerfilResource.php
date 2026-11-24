@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Filament\Resources\Perfils;
+
+use App\Filament\Resources\Perfils\Pages\CreatePerfil;
+use App\Filament\Resources\Perfils\Pages\EditPerfil;
+use App\Filament\Resources\Perfils\Pages\ListPerfils;
+use App\Filament\Resources\Perfils\Schemas\PerfilForm;
+use App\Filament\Resources\Perfils\Tables\PerfilsTable;
+use App\Models\Perfil;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+class PerfilResource extends Resource
+{
+    protected static ?string $model = Perfil::class;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Administración';
+
+    protected static ?string $navigationLabel = 'Perfiles';
+
+    protected static ?string $modelLabel = 'perfil';
+
+    protected static ?string $pluralModelLabel = 'perfiles';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static function form(Schema $schema): Schema
+    {
+        return PerfilForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return PerfilsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListPerfils::route('/'),
+            'create' => CreatePerfil::route('/create'),
+            'edit' => EditPerfil::route('/{record}/edit'),
+        ];
+    }
+}
