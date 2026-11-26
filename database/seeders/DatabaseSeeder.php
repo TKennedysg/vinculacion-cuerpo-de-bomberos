@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PerfilSeeder::class);
         $this->call(PuntoEmisionSeeder::class);
+        $this->call(TipoTramiteSeeder::class);
     }
 }

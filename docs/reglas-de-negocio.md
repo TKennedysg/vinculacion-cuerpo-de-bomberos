@@ -34,7 +34,9 @@ Nota: se asume que el mínimo de $1.25 se compara contra el total base; también
 ## Certificado de solvencia · Erick
 - Valor fijo de $10.00. **CONFIRMADA**
 - Si el contribuyente debe la contribución predial, se muestra una alerta. **CONFIRMADA**
-- ¿La alerta impide emitir el certificado o solo advierte? El PDF dice "informando la mora antes de proceder". **PENDIENTE**
+- La alerta **solo advierte** y exige que el recaudador confirme que informó la mora; no bloquea la
+  emisión. La confirmación queda registrada en `comprobante.observacion`. **DECISIÓN DEL EQUIPO**
+  (pendiente de ratificar con la institución; el PDF solo dice "informando la mora antes de proceder").
 
 ## Permiso de funcionamiento · Santiago
 - ¿Cómo se calcula el valor de la tasa (por tipo de negocio, por área, valor fijo)? **PENDIENTE**
